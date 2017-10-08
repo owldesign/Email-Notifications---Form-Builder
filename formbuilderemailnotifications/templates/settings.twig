@@ -1,0 +1,11 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.textField({
+    label: "Webhook URL"|t,
+    instructions: "Enter your webhook url."|t,
+    id: 'webhookUrl',
+    name: 'webhookUrl',
+    value: settings.webhookUrl,
+    translatable: true,
+    errors: settings.getErrors('webhookUrl')
+}) }}

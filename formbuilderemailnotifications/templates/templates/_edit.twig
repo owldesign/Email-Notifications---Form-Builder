@@ -1,0 +1,46 @@
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+{% import "formbuilder/_includes/_components" as components %}
+
+{% hook 'formBuilder.prepTemplate' %}
+
+{% set fullPageForm = true %}
+{% set selectedSubnavItem = "templates" %}
+{% set bodyClass = 'formbuilder fb-templates-edit' %}
+
+{# TODO: move these to the controller #}
+{% set pageSlug = craft.request.lastSegment %}
+{% if pageSlug == 'edit' %}
+    {% set title = 'Edit Template' %}
+{% else %}
+    {% set title = 'New Template' %}
+{% endif %}
+
+{% block pageHeader %}
+    {% include 'formbuilder/_includes/_header' ignore missing with { title: title } %}
+{% endblock %}
+
+{% block main %}
+
+    {% set errors = template.getErrors() %}
+    <input type="hidden" name="action" value="emailNotifications/template/save">
+    <input type="hidden" name="redirect" value="formbuilder/templates">
+
+    {% if template.id %}
+        <input type="hidden" name="templateId" value="{{ template.id }}">
+    {% endif %}
+
+    {% include 'emailnotifications/templates/layouts/_layout' %}
+
+    {% includeJsResource "emailnotifications/js/templates.js" %}
+    {% includeJsResource "formbuilder/js/forms.js" %}
+    {% includeJsResource "formbuilder/js/option.js" %}
+    {% includeJsResource "formbuilder/js/modal.js" %}
+
+    {% includejs %}
+        $('.section-collapsible').each(function(i,el){
+            new FormBuilderSection(el);
+        });
+    {% endincludejs %}
+
+{% endblock %}

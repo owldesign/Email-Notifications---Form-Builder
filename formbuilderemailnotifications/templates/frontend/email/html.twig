@@ -1,0 +1,268 @@
+{% set options = form.options %}
+
+{% set template = craft.formBuilder.getTemplateByHandle(templateHandle) %}
+{% set content = template.content %}
+{% set styles = template.styles %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="initial-scale=1.0"> <!-- So that mobile webkit will display zoomed in -->
+    <meta name="format-detection" content="telephone=no"> <!-- disable auto telephone linking in iOS -->
+    <title>You got mail!</title> <!-- the <title> tag shows on email notifications on Android 4.4. -->
+    <style type="text/css">
+
+        /* ensure that clients don't add any padding or spaces around the email design and allow us to style emails for the entire width of the preview pane */
+        body,
+        #bodyTable {
+            height:100% !important;
+            width:100% !important;
+            margin:0;
+            padding:0;
+        }
+
+        /* Ensures Webkit- and Windows-based clients don't automatically resize the email text. */
+        body,
+        table,
+        td,
+        p,
+        a,
+        li,
+        blockquote {
+            -ms-text-size-adjust:100%;
+            -webkit-text-size-adjust:100%;
+        }
+
+        /* Forces Yahoo! to display emails at full width */
+        .thread-item.expanded .thread-body .body,
+        .msg-body {
+            width: 100% !important;
+            display: block !important;
+        }
+
+        /* Forces Hotmail to display emails at full width */
+        .ReadMsgBody,
+        .ExternalClass {
+            width: 100%;
+            background-color: #f6f6f6;
+        }
+
+        /* Forces Hotmail to display normal line spacing. */
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+            line-height:100%;
+        }
+
+        /* Resolves webkit padding issue. */
+        table {
+            border-spacing:0;
+        }
+
+        /* Resolves the Outlook 2007, 2010, and Gmail td padding issue, and removes spacing around tables that Outlook adds. */
+        table,
+        td {
+            border-collapse:collapse;
+            mso-table-lspace:0pt;
+            mso-table-rspace:0pt;
+        }
+
+        /* Corrects the way Internet Explorer renders resized images in emails. */
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
+
+        /* Ensures images don't have borders or text-decorations applied to them by default. */
+        img,
+        a img {
+            border:0;
+            outline:none;
+            text-decoration:none;
+        }
+
+        /* Styles Yahoo's auto-sensing link color and border */
+        .yshortcuts a {
+            border-bottom: none !important;
+        }
+
+        /* Styles the tel URL scheme */
+        a[href^=tel],
+        .mobile_link,
+        .mobile_link a {
+            color:#999999 !important;
+        }
+
+        p,h1,h2,h3,h4,h5,span {
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjust: 100%;
+            text-rendering: optimizeLegibility;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-left {
+            text-align: left;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        /* Extra styles for links in clients that support :hover/:active,:focus */
+        a:hover,
+        a:active,
+        a:focus {
+            color: #ffffff !important;
+        }
+
+        /* Extra styles for buttons in clients that support :hover/:active,:focus */
+        a[class="button"]:hover,
+        a[class="button"]:active,
+        a[class="button"]:focus {
+            background: #3494ff !important;
+        }
+
+        /* Apple Mail doesn't support max-width, so we use media queries to constrain the email container width. */
+        @media only screen and (min-width: 601px) {
+            .email-container {
+                width: 600px !important;
+            }
+        }
+
+    </style>
+</head>
+
+{% set containerPadding = (template.styles.container.padding is defined ? template.styles.container.padding ~ 'px' : '60px') %}
+{% set backgroundColor = '#f5f6f7' %}
+{% set containerBackgroundColor = (template.styles.background.color is defined ? template.styles.background.color : '#f5f6f7') %}
+{% set borderColor = (template.styles.border.color is defined ? template.styles.border.color : '#E9EFF4') %}
+{% set borderWidth = (template.styles.border.width is defined ? template.styles.border.width ~ 'px' : '1px') %}
+{% set borderRadius = (template.styles.border.radius is defined ? template.styles.border.radius ~ 'px' : '5px') %}
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" bgcolor="{{ backgroundColor }}" style="margin:0; padding:0; -webkit-text-size-adjust:none; -ms-text-size-adjust:none;">
+<table cellpadding="0" cellspacing="0" border="0" height="100%" width="100%" bgcolor="{{ backgroundColor }}" id="bodyTable" style="table-layout: fixed;margin:0 auto;"><tr><td>
+
+            <!-- Outlook and Lotus Notes don't support max-width but are always on desktop, so we can enforce a wide, fixed width view. -->
+            <!-- Beginning of Outlook-specific wrapper : BEGIN -->
+            <!--[if (gte mso 9)|(IE)]>
+            <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td>
+            <![endif]-->
+            <!-- Beginning of Outlook-specific wrapper : END -->
+
+            <!-- Email wrapper : BEGIN -->
+            <table border="0" width="100%" cellpadding="0" cellspacing="0" align="center" style="max-width: 600px;margin: 40px auto 0 auto;" class="email-wrapper">
+                <tr>
+                    <td>
+                        <table border="0" width="100%" cellpadding="0" cellspacing="0" style="
+                            background: {{ containerBackgroundColor }}; 
+                            -webkit-border-radius: {{ borderRadius }}; 
+                            -moz-border-radius: {{ borderRadius }}; 
+                            border-collapse: collapse;
+                            border-style: hidden;
+                            box-shadow: 0 0 0 {{ borderWidth }} {{ borderColor }};
+                            border-radius: {{ borderRadius }};">
+
+                            <!-- Full Width, Fluid Column : BEGIN -->
+                            <tr>
+                                <td style="padding: {{ containerPadding }};">
+                                    {% if template.content.header.logo.asset is defined %}
+                                        {% set logo = craft.assets.id(template.content.header.logo.asset[0]).first() %}
+                                        {% set logoPosition = template.content.header.logo.position %}
+                                        <div class="logo" style="text-align: {{ logoPosition }};">
+                                            <img src="{{ logo.url }}" />
+                                        </div>
+                                    {% endif %}
+                                    
+                                    <br><br>
+                                    {% if template.content.header is defined and template.content.header.enabled %}
+                                        <span style="font-family: 'Roboto', 'Open Sans', Calibri, sans-serif; font-size: 14px; letter-spacing: 0.04em; line-height: normal; color: #323C47;">{{ template.content.header.copy |raw }}</span>
+                                    {% endif %}
+                                    <br><br>
+
+                                    {% if template.content.body is defined and template.content.body.enabled %}
+                                        <span style="font-family: 'Roboto', 'Open Sans', Calibri, sans-serif; font-size: 14px; letter-spacing: 0.04em; line-height: normal; color: #323C47;">{{ template.content.body.copy |raw }}</span>
+                                    {% endif %}
+
+                                    <br><br>
+
+                                    {% if notification.includeSubmission is defined and notification.includeSubmission %}
+                                        {% if entry %}
+                                            {% set fieldTabs = entry.getFieldLayout.getTabs %}
+                                            {% for tab in fieldTabs %}
+                                                {% set fields = tab.getFields() %}
+
+                                                {% for field in fields %}
+                                                    {% set self = field.getField() %}
+                                                    {% set handle = self.handle %}
+                                                    <div class="field" style="{% if not loop.last %}border-bottom: 1px solid #E9EFF4;{% endif %} font-family: 'Roboto', 'Open Sans', Calibri, sans-serif; font-size: 14px; letter-spacing: 0.04em; line-height: normal; color: #323C47; padding-bottom: 15px; margin-bottom: 15px;">
+                                                        <div class="entry-label" style="margin-bottom: 5px;">{{ self.name }}</div>
+                                                        {% if self.type == 'Assets' %}
+                                                            {% set files = (attribute(entry, handle).find()) %}
+                                                            {% if files %}
+                                                                {% for file in files %}
+                                                                    <a href="{{ file.url }}" class="button" style="display: block;"><!--[if mso]>&nbsp;<![endif]-->{{ file.filename }}<!--[if mso]>&nbsp;<![endif]--></a>
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                        {% elseif self.type == 'Checkboxes' %}
+                                                            <div class="value-results">
+                                                                {% for item in attribute(entry, handle) %}
+                                                                    <strong><span class="entry-value tag-value">{{ item.label }}</span></strong>
+                                                                {% endfor %}
+                                                            </div>
+                                                        {% elseif self.type == 'RadioButtons' %}
+                                                            <strong><span class="entry-value">{{ attribute(entry, handle) }}</span></strong>
+                                                        {% elseif self.type == 'Dropdown' %}
+                                                            <strong><span class="entry-value">{{ attribute(entry, handle) }}</span></strong>
+                                                        {% elseif self.type == 'MultiSelect' %}
+                                                            <div class="value-results">
+                                                                {% for item in attribute(entry, handle) %}
+                                                                    <strong><span class="entry-value tag-value">{{ item.label }}</span></strong>
+                                                                {% endfor %}
+                                                            </div>
+                                                        {% elseif self.type == 'Number' %}
+                                                            <strong><span class="entry-value">{{ attribute(entry, handle) }}</span></strong>
+                                                        {% elseif self.type == 'PlainText' %}
+                                                            <strong><span class="entry-value">{{ attribute(entry, handle) }}</span></strong>
+                                                        {% endif %}
+                                                    </div>
+
+                                                {% endfor %}
+
+                                            {% endfor %}
+                                        {% endif %}
+                                        <br><br>
+                                    {% endif %}
+
+                                    {% if template.content.footer is defined and template.content.footer.enabled %}
+                                        <span style="font-family: 'Roboto', 'Open Sans', Calibri, sans-serif; font-size: 14px; letter-spacing: 0.04em; line-height: normal; color: #323C47;">{{ template.content.footer.copy |raw }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <!-- Email wrapper : END -->
+
+            <!-- End of Outlook-specific wrapper : BEGIN -->
+            <!--[if (gte mso 9)|(IE)]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
+            <!-- End of Outlook-specific wrapper : END -->
+
+        </td></tr></table>
+</body>
+</html>

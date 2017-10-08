@@ -1,0 +1,40 @@
+{% set container = {
+    title: 'Header Content' |t,
+    info: null,
+    icon: null,
+    toggle: true,
+    class: 'is-template',
+    id: null
+} %}
+
+{% set inputs = {
+    0: {
+        type: 'textarea',
+        name: 'content[header][copy]',
+        value: template.content.header.copy is defined ? template.content.header.copy : '',
+        class: 'hidden',
+        id: null,
+        hint: 'COPY'
+    },
+    1: {
+        type: 'checkbox',
+        name: 'content[header][enabled]',
+        value: 1,
+        checked: template.content.header.enabled is defined and template.content.header.enabled == '1' ? true : false,
+        class: 'hidden',
+        id: null
+    },
+} %}
+
+{% set modal = {
+    title: 'Header Content' |t,
+    instructions: null,
+    successMessage: 'Header Content Updated' |t,
+    inputs: inputs
+} %}
+
+{{ components.optionItem(
+    container,
+    modal,
+    inputs
+) }}

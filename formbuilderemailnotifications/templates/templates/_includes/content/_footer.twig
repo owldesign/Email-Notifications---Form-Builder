@@ -1,0 +1,40 @@
+{% set container = {
+    title: 'Footer Content' |t,
+    info: null,
+    icon: null,
+    toggle: true,
+    class: 'is-template',
+    id: null
+} %}
+
+{% set inputs = {
+    0: {
+        type: 'textarea',
+        name: 'content[footer][copy]',
+        value: template.content.footer.copy is defined ? template.content.footer.copy : '',
+        class: 'hidden',
+        id: null,
+        hint: 'COPY'
+    },
+    1: {
+        type: 'checkbox',
+        name: 'content[footer][enabled]',
+        value: '1',
+        checked: template.content.footer.enabled is defined and template.content.footer.enabled == '1' ? true : false,
+        class: 'hidden',
+        id: null
+    },
+} %}
+
+{% set modal = {
+    title: 'Footer Content' |t,
+    instructions: null,
+    successMessage: 'Footer Content Updated' |t,
+    inputs: inputs
+} %}
+
+{{ components.optionItem(
+    container,
+    modal,
+    inputs
+) }}

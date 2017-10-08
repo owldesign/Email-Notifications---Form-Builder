@@ -1,0 +1,25 @@
+<div class="option-item styles-item">
+    <span class="option-title">
+        <span class="option-text">{{ "Header Logo Position" |t }}</span>
+    </span>
+
+    {% set alignments = [
+        { label: 'Left', value: 'left' },
+        { label: 'Center', value: 'center' },
+        { label: 'Right', value: 'right' }
+    ] %}
+
+    {% set value = template.content.header.logo.position is defined ? template.content.header.logo.position %}
+
+    <div class="option-actions">
+        <div class="fb-field">
+            <div class="select">
+                <select id="templateHeaderLogoPosition" name="content[header][logo][position]">
+                    {% for option in alignments %}
+                        <option value="{{ option.value }}" {{ value == option.value ? 'selected' }}>{{ option.label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

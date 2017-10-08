@@ -1,0 +1,21 @@
+<div class="option-item styles-item">
+    <span class="option-title">
+        <span class="option-text">{{ "Header Logo" |t }}</span>
+    </span>
+
+    <div class="option-actions">
+        {% set headerLogo = (template.content.header.logo.asset is defined ? craft.formBuilder.getAssetsById(template.content.header.logo.asset) : []) -%}
+
+        {{ forms.elementSelectField({
+          id: 'templateHeaderLogo',
+          name: 'content[header][logo][asset]',
+          selectionLabel: "Choose"|t,
+          elementType: craft.elements.getElementType("Asset"),
+          elements: headerLogo,
+          criteria: {"kind":[],"localeEnabled":null,"locale":craft.i18n.getCurrentLocale().id},
+          jsClass: 'Craft.AssetSelectInput',
+          limit: 1,
+          errors: template.getErrors('asset'),
+        }) }}
+    </div>
+</div>

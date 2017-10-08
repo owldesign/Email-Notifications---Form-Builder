@@ -1,0 +1,40 @@
+{% set container = {
+    title: 'Body Content' |t,
+    info: null,
+    icon: null,
+    toggle: true,
+    class: 'is-template',
+    id: null
+} %}
+
+{% set inputs = {
+    0: {
+        type: 'textarea',
+        name: 'content[body][copy]',
+        value: template.content.body.copy is defined ? template.content.body.copy : '',
+        class: 'hidden',
+        id: null,
+        hint: 'COPY'
+    },
+    1: {
+        type: 'checkbox',
+        name: 'content[body][enabled]',
+        value: '1',
+        checked: template.content.body.enabled is defined and template.content.body.enabled == '1' ? true : false,
+        class: 'hidden',
+        id: null
+    },
+} %}
+
+{% set modal = {
+    title: 'Body Content' |t,
+    instructions: null,
+    successMessage: 'Body Content Updated' |t,
+    inputs: inputs
+} %}
+
+{{ components.optionItem(
+    container,
+    modal,
+    inputs
+) }}

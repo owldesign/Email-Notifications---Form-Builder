@@ -1,0 +1,10 @@
+{% set form = context.form %}
+{% set notifications = form.notifications.email is defined ? form.notifications.email %}
+
+<div id="formbuilder-email-notifications-container">
+    {% for key, notification in notifications %}
+        {% include 'formbuilderemailnotifications/_includes/_notification' ignore missing with { notification: notification, key: key } %}
+    {% endfor %}
+</div>
+<a href="#" class="btns btn-info btn-repeater add-email-notification" data-context="{{ context |json_encode() }}" data-form-id="{{ context.form.id }}">{{ "Add Email Notification" |t }}</a>
+{% includeJsResource "formbuilderemailnotifications/js/emailnotifications.js" %}
