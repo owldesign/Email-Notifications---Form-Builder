@@ -27,7 +27,7 @@ class FormBuilderEmailNotifications_TemplateController extends BaseController
             $variables['title'] = $variables['template']->name;
         } else {
             if (empty($variables['template'])) {
-                $variables['template'] = new EmailNotifications_TemplateModel();
+                $variables['template'] = new FormBuilderEmailNotifications_TemplateModel();
             }
             $variables['title'] = Craft::t('Create a new email');
         }
@@ -42,7 +42,7 @@ class FormBuilderEmailNotifications_TemplateController extends BaseController
         craft()->templates->includeJsResource('formbuilder/js/libs/fontcolor.js');
         craft()->templates->includeJsResource('formbuilder/js/libs/colorpicker.js');
 
-        $this->renderTemplate('emailnotifications/templates/_edit', $variables);
+        $this->renderTemplate('formbuilderemailnotifications/templates/_edit', $variables);
     }
 
     /**
@@ -51,7 +51,7 @@ class FormBuilderEmailNotifications_TemplateController extends BaseController
     public function actionSave()
     {
         $this->requirePostRequest();
-        $template = new EmailNotifications_TemplateModel();
+        $template = new FormBuilderEmailNotifications_TemplateModel();
 
         $template->id         = craft()->request->getPost('templateId');
         $template->name       = craft()->request->getPost('name');

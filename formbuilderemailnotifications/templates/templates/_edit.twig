@@ -23,16 +23,16 @@
 {% block main %}
 
     {% set errors = template.getErrors() %}
-    <input type="hidden" name="action" value="emailNotifications/template/save">
+    <input type="hidden" name="action" value="formBuilderEmailNotifications/template/save">
     <input type="hidden" name="redirect" value="formbuilder/templates">
 
     {% if template.id %}
         <input type="hidden" name="templateId" value="{{ template.id }}">
     {% endif %}
 
-    {% include 'emailnotifications/templates/layouts/_layout' %}
+    {% include 'formbuilderemailnotifications/templates/layouts/_layout' %}
 
-    {% includeJsResource "emailnotifications/js/templates.js" %}
+    {% includeJsResource "formbuilderemailnotifications/js/templates.js" %}
     {% includeJsResource "formbuilder/js/forms.js" %}
     {% includeJsResource "formbuilder/js/option.js" %}
     {% includeJsResource "formbuilder/js/modal.js" %}

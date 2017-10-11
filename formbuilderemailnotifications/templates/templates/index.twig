@@ -35,7 +35,7 @@
                         <td data-title="{{ "Name"|t }}" class="name col-left"><a href="{{ url('formbuilder/templates/' ~ template.id ~ '/edit') }}">{{ template.name }}</a></td>
                         <td data-title="{{ "Updated"|t }}">{{ template.dateUpdated |date('m/d/Y')}}</td>
                         <td class="template-actions col-center" data-template-id="{{ template.id }}" data-template-handle="{{ template.handle }}" data-template-name="{{ template.name }}">
-                            <a href="#" class="delete-index-template delete-icon" data-id="{{ template.id }}" data-name="{{ template.name }}"><i class="fa fa-close"></i></a>
+                            <a class="delete delete-icon" data-id="{{ template.id }}" data-name="{{ template.name }}"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -52,6 +52,7 @@
         var templateTable = new Craft.AdminTable({
             tableSelector: '#formbuilder-templates',
             noObjectsSelector: '#notemplates',
+            deleteAction: 'formBuilderEmailNotifications/template/delete',
             sortable: true,
             reorderAction: 'formBuilder/template/reorder',
             reorderSuccessMessage: '{{ "Template reordered"|t }}',

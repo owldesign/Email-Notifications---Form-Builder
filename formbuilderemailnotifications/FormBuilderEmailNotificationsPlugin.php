@@ -106,24 +106,24 @@ class FormBuilderEmailNotificationsPlugin extends BasePlugin
     *
     * @return array
     */
-    protected function defineSettings()
-    {
-        return array(
-            'webhookUrl' => array(AttributeType::String),
-        );
-    }
+    // protected function defineSettings()
+    // {
+    //     return array(
+    //         'webhookUrl' => array(AttributeType::String),
+    //     );
+    // }
 
     /**
      * Get settings html
      *
      * @return string
      */
-    public function getSettingsHtml()
-    {
-        return craft()->templates->render('formbuilderemailnotifications/settings', array(
-            'settings' => $this->getSettings()
-        ));
-    }
+    // public function getSettingsHtml()
+    // {
+    //     return craft()->templates->render('formbuilderemailnotifications/settings', array(
+    //         'settings' => $this->getSettings()
+    //     ));
+    // }
 
     /**
      * Required plugin fields

@@ -1,5 +1,7 @@
 {% import "formbuilder/_includes/_components" as components %}
 
+{% set templates = craft.formBuilderEmailNotifications.getAllTemplates() %}
+
 {% set item = key is defined ? key : 'new' ~ index %}
 {% set enabled = attribute(form.notifications.email, item).enabled is defined and attribute(form.notifications.email, item).enabled ? true : false %}
 {% set collapsed = attribute(form.settings.sections.notifications.email, item).collapsed is defined and attribute(form.settings.sections.notifications.email, item).collapsed ? true : false %}
@@ -44,7 +46,9 @@
         {% include 'formbuilderemailnotifications/_includes/fields/reply-to' ignore missing %}
         {% include 'formbuilderemailnotifications/_includes/fields/cc' ignore missing %}
         {% include 'formbuilderemailnotifications/_includes/fields/subject' ignore missing %}
-        {% include 'formbuilderemailnotifications/_includes/fields/template' ignore missing %}
+        {% if templates %}
+            {% include 'formbuilderemailnotifications/_includes/fields/template' ignore missing %}
+        {% endif %}
         {% include 'formbuilderemailnotifications/_includes/fields/attachments' ignore missing %}
     </div>
 </section>

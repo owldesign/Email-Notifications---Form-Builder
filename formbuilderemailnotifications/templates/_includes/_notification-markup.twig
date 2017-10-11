@@ -1,5 +1,7 @@
 {% import "formbuilder/_includes/_components" as components %}
 
+{% set templates = craft.formBuilderEmailNotifications.getAllTemplates() %}
+
 {% set item = key is defined ? key : 'new' ~ index %}
 
 <section class="cmp-tout section-collapsible email-notification-section" id="email-notification-{{ index }}">
@@ -38,7 +40,9 @@
         {% include 'formbuilderemailnotifications/_includes/fields/reply-to' ignore missing %}
         {% include 'formbuilderemailnotifications/_includes/fields/cc' ignore missing %}
         {% include 'formbuilderemailnotifications/_includes/fields/subject' ignore missing %}
-        {% include 'formbuilderemailnotifications/_includes/fields/template' ignore missing %}
+        {% if templates %}
+            {% include 'formbuilderemailnotifications/_includes/fields/template' ignore missing %}
+        {% endif %}
         {% include 'formbuilderemailnotifications/_includes/fields/attachments' ignore missing %}
     </div>
 </section>
