@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 2017 Vadim Goncharov
  * @link      http://owl-design.net
  * @package   EmailNotifications
- * @since     1.0.0
+ * @since     1.0.1
  */
 
 namespace Craft;
@@ -66,7 +66,7 @@ class FormBuilderEmailNotificationsPlugin extends BasePlugin
      */
     public function getVersion()
     {
-        return '1.0.0';
+        return '1.0.1';
     }
 
     /**

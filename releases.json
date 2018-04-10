@@ -1,5 +1,13 @@
 [
     {
+        "version": "1.0.1",
+        "downloadUrl": "https://github.com/owldesign/formbuilder-emailnotifications/archive/master.zip",
+        "date": "2018-04-10T23:36:09+00:00",
+        "notes": [
+            "[Fixed] email template errors"
+        ]
+    },
+    {
         "version": "1.0.0",
         "downloadUrl": "https://github.com/owldesign/formbuilder-emailnotifications/archive/master.zip",
         "date": "2017-08-31T03:02:21.711Z",

@@ -21,7 +21,7 @@
     0: {
         type: 'select',
         name: name,
-        value: attribute(form.notifications.email, item) is defined and attribute(form.notifications.email, item).template.handle != '' ? attribute(form.notifications.email, item).template.handle : '',
+        value: attribute(form.notifications.email, item) is defined and attribute(form.notifications.email, item).template.enabled == '1' and attribute(form.notifications.email, item).template.handle != '' ? attribute(form.notifications.email, item).template.handle : '',
         options: templateOption |json_encode(),
         class: 'hidden',
         id: null,
